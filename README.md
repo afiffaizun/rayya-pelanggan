@@ -1,20 +1,92 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Rayya Water
 
-# Run and deploy your AI Studio app
+Aplikasi Dikembangkan sebagai bagian dari mata kuliah MPPL.
 
-This contains everything you need to run your app locally.
+## Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/f67f4140-baab-465b-9fe3-3bbbc2896b34
+| Teknologi | Versi | Fungsi |
+|-----------|-------|--------|
+| React | 19 | UI Library |
+| TypeScript | 5.8 | Type Safety |
+| Vite | 6 | Build Tool & Dev Server |
+| Tailwind CSS | 4 | Utility-First CSS |
+| Motion (Framer Motion) | 12 | Animasi & Transisi |
+| Lucide React | 0.546 | Ikon |
 
-## Run Locally
+## Fitur
 
-**Prerequisites:**  Node.js
+- Login & Registrasi Pelanggan
+- Dashboard pemesanan air galon (Refill / Galon Baru)
+- Pilihan metode pembayaran (COD, E-Wallet, Bank Transfer)
+- Riwayat pesanan
+- Profil pelanggan
+- Tampilan Mobile Frame (bingkai HP realistis)
+
+## Cara Setup
+
+### Prerequisites
+
+- Node.js >= 18
+- npm
+
+### Instalasi
+
+```bash
+# 1. Clone repository
+git clone <url-repo>
+
+# 2. Masuk ke direktori project
+cd rayya-water
+
+# 3. Install dependencies
+npm install
+
+# 4. Copy file environment
+cp .env.example .env
+
+# 5. Isi GEMINI_API_KEY di file .env (opsional)
+
+# 6. Jalankan dev server
+npm run dev
+```
+
+Buka browser dan akses `http://localhost:3000`.
+
+### Available Scripts
+
+| Command | Fungsi |
+|---------|--------|
+| `npm run dev` | Jalankan dev server di port 3000 |
+| `npm run build` | Build untuk production |
+| `npm run preview` | Preview hasil build |
+| `npm run lint` | Type check dengan TypeScript |
+
+## Struktur Projek
+
+```
+rayya-water/
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── .env.example
+└── src/
+    ├── main.tsx                 # Entry point
+    ├── App.tsx                  # Root component, routing screen
+    ├── types.ts                 # TypeScript enums & interfaces
+    ├── index.css                # Global styles & Tailwind config
+    └── components/
+        ├── MobileFrame.tsx          # Bingkai tampilan HP
+        ├── KurirLoginScreen.tsx     # Halaman login pelanggan
+        ├── RegisterScreen.tsx       # Halaman registrasi akun
+        ├── SuccessScreen.tsx        # Halaman sukses pendaftaran
+        ├── DashboardScreen.tsx      # Dashboard utama (order, nav)
+        ├── CustomerHomeTab.tsx      # Tab beranda
+        ├── CustomerProfileTab.tsx   # Tab profil pelanggan
+        ├── OrderHistoryTab.tsx      # Tab riwayat pesanan
+        ├── OrderDetailModal.tsx     # Modal detail pesanan
+        ├── PaymentScreen.tsx        # Layar pembayaran
+        └── ControlPanel.tsx         # Panel kontrol demo
+```
 
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`

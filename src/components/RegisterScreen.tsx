@@ -78,10 +78,10 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
   };
 
   const handleFillDemo = () => {
-    setFullName("Syafaat Afif");
-    setUsername("syafaat31");
+    setFullName("Bima Perkasa");
+    setUsername("bima");
     setPhone("0832398329239");
-    setPassword("123412");
+    setPassword("123456");
     setAddress("Perumahan Indah Asri Blok C-12, Tarogong Kidul");
     setTermsAccepted(true);
     setErrors({});
@@ -152,34 +152,6 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
               )}
             </div>
 
-            {/* Username */}
-            <div>
-              <label className="block text-[12px] font-bold text-slate-700 mb-1 font-sans">
-                Username
-              </label>
-              <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
-                  <User className="w-[18px] h-[18px]" />
-                </span>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                    if (errors.username) setErrors({ ...errors, username: undefined });
-                  }}
-                  placeholder="Username"
-                  className={`w-full h-11 pl-10 pr-4 rounded-xl text-[13px] bg-[#f8fafd] text-slate-800 border ${
-                    errors.username ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-blue-400"
-                  } outline-none transition-all placeholder:text-slate-400 font-medium`}
-                  id="reg-username-input"
-                />
-              </div>
-              {errors.username && (
-                <p className="text-red-500 text-[10px] mt-1 ml-1">{errors.username}</p>
-              )}
-            </div>
-
             {/* Number Telepon */}
             <div>
               <label className="block text-[12px] font-bold text-slate-700 mb-1 font-sans">
@@ -205,6 +177,62 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
               </div>
               {errors.phone && (
                 <p className="text-red-500 text-[10px] mt-1 ml-1">{errors.phone}</p>
+              )}
+            </div>
+
+            {/* Alamat Anda */}
+            <div>
+              <label className="block text-[12px] font-bold text-slate-700 mb-1 font-sans">
+                Alamat Anda
+              </label>
+              <div className="relative">
+                <span className="absolute left-3.5 top-3 text-slate-400">
+                  <MapPin className="w-[18px] h-[18px]" />
+                </span>
+                <textarea
+                  value={address}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                    if (errors.address) setErrors({ ...errors, address: undefined });
+                  }}
+                  rows={2}
+                  placeholder="Masukan Alamat Jalan, Kecamatan"
+                  className={`w-full pl-10 pr-4 py-2.5 rounded-xl text-[13px] bg-[#f8fafd] text-slate-800 border ${
+                    errors.address ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-blue-400"
+                  } outline-none transition-all placeholder:text-slate-400 font-medium resize-none leading-relaxed`}
+                  id="reg-address-input"
+                />
+              </div>
+              {errors.address && (
+                <p className="text-red-500 text-[10px] mt-1 ml-1">{errors.address}</p>
+              )}
+            </div>
+
+            {/* Username */}
+            <div>
+              <label className="block text-[12px] font-bold text-slate-700 mb-1 font-sans">
+                Username
+              </label>
+              <div className="relative">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+                  <User className="w-[18px] h-[18px]" />
+                </span>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    if (errors.username) setErrors({ ...errors, username: undefined });
+                  }}
+                  placeholder="Username"
+                  className={`w-full h-11 pl-10 pr-4 rounded-xl text-[13px] bg-[#f8fafd] text-slate-800 border ${
+                    errors.username ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-blue-400"
+                  } outline-none transition-all placeholder:text-slate-400 font-medium`}
+                  id="reg-username-input"
+                />
+              </div>
+              {errors.username && (
+                <p className="text-red-500 text-[10px] mt-1 ml-1">{errors.username}</p>
               )}
             </div>
 
@@ -240,34 +268,6 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({
               </div>
               {errors.password && (
                 <p className="text-red-500 text-[10px] mt-1 ml-1">{errors.password}</p>
-              )}
-            </div>
-
-            {/* Alamat Anda */}
-            <div>
-              <label className="block text-[12px] font-bold text-slate-700 mb-1 font-sans">
-                Alamat Anda
-              </label>
-              <div className="relative">
-                <span className="absolute left-3.5 top-3 text-slate-400">
-                  <MapPin className="w-[18px] h-[18px]" />
-                </span>
-                <textarea
-                  value={address}
-                  onChange={(e) => {
-                    setAddress(e.target.value);
-                    if (errors.address) setErrors({ ...errors, address: undefined });
-                  }}
-                  rows={2}
-                  placeholder="Masukan Alamat Jalan, Kecamatan"
-                  className={`w-full pl-10 pr-4 py-2.5 rounded-xl text-[13px] bg-[#f8fafd] text-slate-800 border ${
-                    errors.address ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-blue-400"
-                  } outline-none transition-all placeholder:text-slate-400 font-medium resize-none leading-relaxed`}
-                  id="reg-address-input"
-                />
-              </div>
-              {errors.address && (
-                <p className="text-red-500 text-[10px] mt-1 ml-1">{errors.address}</p>
               )}
             </div>
 

@@ -73,8 +73,8 @@ export const KurirLoginScreen: React.FC<KurirLoginScreenProps> = ({
       setKurirId(registeredProfile.username);
       setPin(registeredProfile.password);
     } else {
-      setKurirId("syafaat31");
-      setPin("123412");
+      setKurirId("mama");
+      setPin("12345");
     }
     setErrors({});
   };

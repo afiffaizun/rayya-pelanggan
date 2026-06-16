@@ -12,7 +12,7 @@ import {
   ActiveOrder,
   CustomerProfile
 } from "./types";
-import { KurirLoginScreen } from "./components/KurirLoginScreen";
+import { KurirLoginScreen } from "./components/LoginScreen";
 import { RegisterScreen } from "./components/RegisterScreen";
 import { SuccessScreen } from "./components/SuccessScreen";
 import { DashboardScreen } from "./components/DashboardScreen";
@@ -20,6 +20,7 @@ import { CustomerHomeTab } from "./components/CustomerHomeTab";
 import { OrderHistoryTab } from "./components/OrderHistoryTab";
 import { CustomerProfileTab } from "./components/CustomerProfileTab";
 import { motion, AnimatePresence } from "motion/react";
+import { MobileFrame } from "./components/MobileFrame";
 
 export default function App() {
   // 1. Initial State Definitions
@@ -146,57 +147,59 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen w-full bg-slate-50 flex flex-col overflow-hidden">
-      <AnimatePresence mode="wait">
-        {currentScreen === ScreenType.KURIR_LOGIN && (
-          <KurirLoginScreen
-            key="kurir-login"
-            onRegisterClick={() => setCurrentScreen(ScreenType.REGISTER)}
-            onLoginSuccess={handleKurirLoginSuccess}
-            registeredProfile={profile}
-          />
-        )}
+    <div className="h-screen w-full bg-slate-900 flex items-center justify-center overflow-hidden">
+      <MobileFrame>
+        <AnimatePresence mode="wait">
+          {currentScreen === ScreenType.KURIR_LOGIN && (
+            <KurirLoginScreen
+              key="kurir-login"
+              onRegisterClick={() => setCurrentScreen(ScreenType.REGISTER)}
+              onLoginSuccess={handleKurirLoginSuccess}
+              registeredProfile={profile}
+            />
+          )}
 
-        {currentScreen === ScreenType.REGISTER && (
-          <RegisterScreen
-            key="register"
-            onBack={() => setCurrentScreen(ScreenType.KURIR_LOGIN)}
-            onSuccess={handleRegisterSuccess}
-            onLoginClick={() => setCurrentScreen(ScreenType.KURIR_LOGIN)}
-          />
-        )}
+          {currentScreen === ScreenType.REGISTER && (
+            <RegisterScreen
+              key="register"
+              onBack={() => setCurrentScreen(ScreenType.KURIR_LOGIN)}
+              onSuccess={handleRegisterSuccess}
+              onLoginClick={() => setCurrentScreen(ScreenType.KURIR_LOGIN)}
+            />
+          )}
 
-        {currentScreen === ScreenType.SUCCESS && (
-          <SuccessScreen
-            key="success"
-            onProceed={() => {
-              setCurrentScreen(ScreenType.KURIR_LOGIN);
-              triggerNotification("🔑 Silakan login dengan akun yang baru dibuat.");
-            }}
-            onContactCS={handleContactCS}
-          />
-        )}
+          {currentScreen === ScreenType.SUCCESS && (
+            <SuccessScreen
+              key="success"
+              onProceed={() => {
+                setCurrentScreen(ScreenType.KURIR_LOGIN);
+                triggerNotification("🔑 Silakan login dengan akun yang baru dibuat.");
+              }}
+              onContactCS={handleContactCS}
+            />
+          )}
 
-        {currentScreen === ScreenType.DASHBOARD && (
-          <DashboardScreen
-            key="dashboard"
-            profile={profile}
-            activeOrders={orders}
-            onPlaceOrder={handlePlaceOrder}
-            onModifyStock={handleModifyStock}
-            stockUnits={stockUnits}
-            onBackToWelcome={() => setCurrentScreen(ScreenType.SUCCESS)}
-            onLogOut={() => {
-              setLoggedAsKurirId(null);
-              setCurrentScreen(ScreenType.KURIR_LOGIN);
-              triggerNotification("🚪 Berhasil Logout.");
-            }}
-            currentTab={currentTab}
-            setCurrentTab={setCurrentTab}
-            renderExtraTabsContent={renderExtraTabsContent}
-          />
-        )}
-      </AnimatePresence>
+          {currentScreen === ScreenType.DASHBOARD && (
+            <DashboardScreen
+              key="dashboard"
+              profile={profile}
+              activeOrders={orders}
+              onPlaceOrder={handlePlaceOrder}
+              onModifyStock={handleModifyStock}
+              stockUnits={stockUnits}
+              onBackToWelcome={() => setCurrentTab(DashboardTab.HOME)}
+              onLogOut={() => {
+                setLoggedAsKurirId(null);
+                setCurrentScreen(ScreenType.KURIR_LOGIN);
+                triggerNotification("🚪 Berhasil Logout.");
+              }}
+              currentTab={currentTab}
+              setCurrentTab={setCurrentTab}
+              renderExtraTabsContent={renderExtraTabsContent}
+            />
+          )}
+        </AnimatePresence>
+      </MobileFrame>
 
       {/* Floating System-Wide Push Notification Bubble */}
       <AnimatePresence>
