@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from "react";
-import { User, Lock, Eye, EyeOff, ChevronRight, Sparkles } from "lucide-react";
+import { User, Lock, Eye, EyeOff, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
 import { CustomerProfile } from "../types";
 
@@ -66,17 +66,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
     }
 
     onLoginSuccess(kurirId.trim());
-  };
-
-  const handleFillDemo = () => {
-    if (registeredProfile && registeredProfile.username) {
-      setKurirId(registeredProfile.username);
-      setPin(registeredProfile.password);
-    } else {
-      setKurirId("mama");
-      setPin("12345");
-    }
-    setErrors({});
   };
 
   return (
@@ -201,19 +190,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
               <ChevronRight className="w-4 h-4 ml-0.5 mt-[1px]" />
             </button>
           </form>
-
-          {/* Helper quick demo values */}
-          <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-[11px] text-slate-400 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-amber-500" /> Demo Akun Pelanggan:
-            </span>
-            <button
-              onClick={handleFillDemo}
-              className="text-[11px] font-bold text-brand-blue bg-blue-50 px-2 py-1 rounded hover:bg-blue-100 transition-colors"
-            >
-              Gunakan Default
-            </button>
-          </div>
         </div>
       </div>
 

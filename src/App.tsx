@@ -147,7 +147,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen w-full bg-slate-900 flex items-center justify-center overflow-hidden">
+    <div className="h-screen w-full bg-white flex items-center justify-center overflow-hidden">
       <MobileFrame>
         <AnimatePresence mode="wait">
           {currentScreen === ScreenType.KURIR_LOGIN && (
