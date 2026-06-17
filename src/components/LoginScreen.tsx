@@ -111,7 +111,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
             {/* Field: Nomor HP / Username */}
             <div>
               <label className="block text-[13px] font-semibold text-slate-600 mb-1.5 font-sans">
-                Nomor HP / Username Pelanggan
+                Username 
               </label>
               <div className="relative">
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
@@ -124,7 +124,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({
                     setKurirId(e.target.value);
                     if (errors.kurirId) setErrors({ ...errors, kurirId: undefined });
                   }}
-                  placeholder="Contoh: 0832398329239 / syafaat31"
+                  placeholder="Contoh: pelanggan"
                   className={`w-full h-12 pl-10 pr-4 rounded-xl text-[14px] bg-[#f4f7fe] text-slate-800 border ${
                     errors.kurirId ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-blue-400"
                   } outline-none transition-all placeholder:text-slate-400 font-medium`}
