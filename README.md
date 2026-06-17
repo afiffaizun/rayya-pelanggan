@@ -35,7 +35,7 @@ Aplikasi Dikembangkan sebagai bagian dari mata kuliah MPPL.
 **1. Clone repository**
 
 ```bash
-git clone https://github.com/afiffaizun/rayya-water.git
+git clone https://github.com/afiffaizun/rayya-pelanggan.git
 ```
 
 **2. Masuk ke direktori project**
