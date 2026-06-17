@@ -26,67 +26,52 @@ Aplikasi Dikembangkan sebagai bagian dari mata kuliah MPPL.
 
 ### Prerequisites
 
-- Node.js >= 18
-- npm
+- [Node.js](https://nodejs.org/) >= 18
+- npm (sudah termasuk saat install Node.js)
+- Git
 
-### Instalasi
+### Langkah-Langkah
+
+**1. Clone repository**
 
 ```bash
-# 1. Clone repository
-git clone <url-repo>
+git clone https://github.com/afiffaizun/rayya-water.git
+```
 
-# 2. Masuk ke direktori project
+**2. Masuk ke direktori project**
+
+```bash
 cd rayya-water
+```
 
-# 3. Install dependencies
+**3. Install dependencies**
+
+```bash
 npm install
+```
 
-# 4. Copy file environment
+**4. Setup file environment**
+
+```bash
 cp .env.example .env
+```
 
-# 5. Isi GEMINI_API_KEY di file .env (opsional)
+Buka file `.env` dan isi `GEMINI_API_KEY` jika ingin menggunakan fitur AI (opsional).
 
-# 6. Jalankan dev server
+**5. Jalankan development server**
+
+```bash
 npm run dev
 ```
 
-Buka browser dan akses `http://localhost:3000`.
+Buka browser dan akses **http://localhost:3000**.
 
-### Available Scripts
+### Perintah Lainnya
 
-| Command | Fungsi |
-|---------|--------|
-| `npm run dev` | Jalankan dev server di port 3000 |
+| Perintah | Fungsi |
+|----------|--------|
 | `npm run build` | Build untuk production |
 | `npm run preview` | Preview hasil build |
-| `npm run lint` | Type check dengan TypeScript |
+| `npm run lint` | Jalankan TypeScript type checking |
+| `npm run clean` | Hapus folder `dist` dan `server.js` |
 
-## Struktur Projek
-
-```
-rayya-water/
-├── index.html
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-├── .env.example
-└── src/
-    ├── main.tsx                 # Entry point
-    ├── App.tsx                  # Root component, routing screen
-    ├── types.ts                 # TypeScript enums & interfaces
-    ├── index.css                # Global styles & Tailwind config
-    └── components/
-        ├── MobileFrame.tsx          # Bingkai tampilan HP
-        ├── KurirLoginScreen.tsx     # Halaman login pelanggan
-        ├── RegisterScreen.tsx       # Halaman registrasi akun
-        ├── SuccessScreen.tsx        # Halaman sukses pendaftaran
-        ├── DashboardScreen.tsx      # Dashboard utama (order, nav)
-        ├── CustomerHomeTab.tsx      # Tab beranda
-        ├── CustomerProfileTab.tsx   # Tab profil pelanggan
-        ├── OrderHistoryTab.tsx      # Tab riwayat pesanan
-        ├── OrderDetailModal.tsx     # Modal detail pesanan
-        ├── PaymentScreen.tsx        # Layar pembayaran
-        └── ControlPanel.tsx         # Panel kontrol demo
-```
-
-Ini adalah aplikasi SPA (Single Page Application) mobile-first untuk layanan pengantaran air galon. Menggunakan React 19 + TypeScript + Tailwind CSS 4 + Vite 6. State management menggunakan useState bawaan React (tanpa Redux/Zustand). Tidak ada database — semua data dikelola di memori.
