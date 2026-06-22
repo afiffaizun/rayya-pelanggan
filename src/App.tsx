@@ -51,6 +51,7 @@ export default function App() {
       date: "16 Juni 2026",
       price: 6000,
       address: "Perumahan Indah Asri Blok C-12, Tarogong Kidul",
+      recipientName: "Syafaat Afif",
     },
     {
       id: "ORD-87123",
@@ -61,6 +62,7 @@ export default function App() {
       date: "12 Juni 2026",
       price: 36000,
       address: "Perumahan Indah Asri Blok C-12, Tarogong Kidul",
+      recipientName: "Syafaat Afif",
     },
   ]);
 
@@ -95,6 +97,7 @@ export default function App() {
     paymentMethod: PaymentMethod;
     price: number;
     address: string;
+    recipientName: string;
   }) => {
     // Generate simple ID
     const randomId = "ORD-" + Math.floor(10000 + Math.random() * 90000);
@@ -107,6 +110,7 @@ export default function App() {
       date: "Hari Ini",
       price: newOrder.price,
       address: newOrder.address,
+      recipientName: newOrder.recipientName,
     };
 
     // Prepend order

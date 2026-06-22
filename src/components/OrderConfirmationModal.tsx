@@ -11,6 +11,7 @@ import {
   ChevronDown,
   RefreshCw,
   PlusSquare,
+  User,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { WaterType, PaymentMethod } from "../types";
@@ -21,7 +22,8 @@ interface OrderConfirmationModalProps {
   paymentMethod: PaymentMethod;
   price: number;
   address: string;
-  onConfirm: (address: string, paymentMethod: PaymentMethod) => void;
+  recipientName: string;
+  onConfirm: (address: string, paymentMethod: PaymentMethod, recipientName: string) => void;
   onCancel: () => void;
 }
 
@@ -31,12 +33,14 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
   paymentMethod: initialPaymentMethod,
   price,
   address: initialAddress,
+  recipientName: initialRecipientName,
   onConfirm,
   onCancel,
 }) => {
   const [editAddress, setEditAddress] = useState(initialAddress);
   const [editPaymentMethod, setEditPaymentMethod] =
     useState<PaymentMethod>(initialPaymentMethod);
+  const [editRecipientName, setEditRecipientName] = useState(initialRecipientName);
 
   const unitPrice = waterType === WaterType.REFILL ? 6000 : 18000;
 
@@ -137,6 +141,23 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
           </div>
         </div>
 
+        {/* Nama Penerima (Editable) */}
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm space-y-2">
+          <h4 className="text-[13px] font-extrabold text-slate-800 flex items-center gap-1.5">
+            <User className="w-4 h-4 text-slate-500" /> Nama Penerima
+          </h4>
+          <div className="flex items-start gap-2">
+            <User className="w-4 h-4 text-[#0b5ce5] mt-0.5 shrink-0" />
+            <input
+              type="text"
+              value={editRecipientName}
+              onChange={(e) => setEditRecipientName(e.target.value)}
+              placeholder="Masukkan nama penerima..."
+              className="flex-1 h-10 px-3 text-[12px] leading-relaxed text-slate-600 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-[#0b5ce5] transition-colors"
+            />
+          </div>
+        </div>
+
         {/* Alamat Pengantaran (Editable) */}
         <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm space-y-2">
           <h4 className="text-[13px] font-extrabold text-slate-800 flex items-center gap-1.5">
@@ -157,7 +178,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
       {/* Bottom Buttons */}
       <div className="px-5 py-4 border-t border-slate-100 bg-white shrink-0 space-y-2">
         <button
-          onClick={() => onConfirm(editAddress, editPaymentMethod)}
+          onClick={() => onConfirm(editAddress, editPaymentMethod, editRecipientName)}
           className="w-full h-11 rounded-xl bg-[#0b5ce5] hover:bg-blue-700 text-white font-bold text-[13px] flex items-center justify-center transition-all active:scale-[0.98] shadow-md shadow-blue-500/10"
         >
           Konfirmasi Pesanan

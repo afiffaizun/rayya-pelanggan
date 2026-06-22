@@ -47,6 +47,7 @@ interface DashboardScreenProps {
     paymentMethod: PaymentMethod;
     price: number;
     address: string;
+    recipientName: string;
   }) => void;
   onModifyStock: (units: number) => void;
   stockUnits: number;
@@ -119,7 +120,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
     });
   };
 
-  const onConfirmOrder = (address: string, finalPaymentMethod: PaymentMethod) => {
+  const onConfirmOrder = (address: string, finalPaymentMethod: PaymentMethod, recipientName: string) => {
     if (!confirmingOrder) return;
 
     onPlaceOrder({
@@ -128,6 +129,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
       paymentMethod: finalPaymentMethod,
       price: confirmingOrder.price,
       address,
+      recipientName,
     });
 
     const now = new Date();
@@ -143,6 +145,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
       date: dateStr,
       price: confirmingOrder.price,
       address,
+      recipientName,
     };
 
     setConfirmingOrder(null);
@@ -411,6 +414,7 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
             paymentMethod={confirmingOrder.paymentMethod}
             price={confirmingOrder.price}
             address={profile.address}
+            recipientName={profile.fullName}
             onConfirm={onConfirmOrder}
             onCancel={() => setConfirmingOrder(null)}
           />

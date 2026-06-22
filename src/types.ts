@@ -33,6 +33,7 @@ export interface ActiveOrder {
   date: string;
   price: number;
   address: string;
+  recipientName: string;
 }
 
 export interface CustomerProfile {

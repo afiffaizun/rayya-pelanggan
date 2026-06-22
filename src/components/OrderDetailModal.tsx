@@ -17,6 +17,7 @@ import {
   ArrowLeft,
   MessageCircle,
   ExternalLink,
+  User,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { ActiveOrder, WaterType } from "../types";
@@ -255,6 +256,19 @@ export const OrderDetailModal: React.FC<OrderDetailModalProps> = ({
               </div>
               <span className="font-semibold text-slate-700">{order.date}</span>
             </div>
+          </div>
+        </div>
+
+        {/* Nama Penerima */}
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm space-y-3">
+          <h4 className="text-[13px] font-extrabold text-slate-800 flex items-center gap-1.5">
+            <User className="w-4 h-4 text-slate-500" /> Nama Penerima
+          </h4>
+          <div className="flex items-start gap-2">
+            <User className="w-4 h-4 text-[#0b5ce5] mt-0.5 shrink-0" />
+            <span className="text-[12px] leading-relaxed text-slate-600 font-medium">
+              {order.recipientName || "Belum ada nama penerima"}
+            </span>
           </div>
         </div>
 
