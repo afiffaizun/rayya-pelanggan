@@ -32,6 +32,7 @@ export interface ActiveOrder {
   status: "In Transit" | "Processing" | "Completed" | "Pending";
   date: string;
   price: number;
+  address: string;
 }
 
 export interface CustomerProfile {

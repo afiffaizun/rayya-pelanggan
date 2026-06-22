@@ -34,6 +34,7 @@ import {
   CustomerProfile
 } from "../types";
 import { OrderDetailModal } from "./OrderDetailModal";
+import { OrderConfirmationModal } from "./OrderConfirmationModal";
 import { PaymentScreen } from "./PaymentScreen";
 
 interface DashboardScreenProps {
@@ -44,6 +45,7 @@ interface DashboardScreenProps {
     waterType: WaterType;
     paymentMethod: PaymentMethod;
     price: number;
+    address: string;
   }) => void;
   onModifyStock: (units: number) => void;
   stockUnits: number;
@@ -70,6 +72,12 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
   const [qty, setQty] = useState(1);
   const [waterType, setWaterType] = useState<WaterType>(WaterType.REFILL);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("Cash on Delivery");
+  const [confirmingOrder, setConfirmingOrder] = useState<{
+    qty: number;
+    waterType: WaterType;
+    paymentMethod: PaymentMethod;
+    price: number;
+  } | null>(null);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [selectedOrder, setSelectedOrder] = useState<ActiveOrder | null>(null);
@@ -100,11 +108,23 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
       return;
     }
 
-    onPlaceOrder({
+    setConfirmingOrder({
       qty,
       waterType,
       paymentMethod,
       price: totalPrice,
+    });
+  };
+
+  const onConfirmOrder = (address: string, finalPaymentMethod: PaymentMethod) => {
+    if (!confirmingOrder) return;
+
+    onPlaceOrder({
+      qty: confirmingOrder.qty,
+      waterType: confirmingOrder.waterType,
+      paymentMethod: finalPaymentMethod,
+      price: confirmingOrder.price,
+      address,
     });
 
     const now = new Date();
@@ -113,20 +133,23 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
 
     const newOrder: ActiveOrder = {
       id: orderId,
-      qty,
-      waterType,
-      paymentMethod,
+      qty: confirmingOrder.qty,
+      waterType: confirmingOrder.waterType,
+      paymentMethod: finalPaymentMethod,
       status: "Processing",
       date: dateStr,
-      price: totalPrice,
+      price: confirmingOrder.price,
+      address,
     };
 
-    if (paymentMethod === "Cash on Delivery") {
+    setConfirmingOrder(null);
+    setQty(1);
+
+    if (finalPaymentMethod === "Cash on Delivery") {
       setSelectedOrder(newOrder);
     } else {
       setPendingPaymentOrder(newOrder);
     }
-    setQty(1);
   };
 
   // Determine latest order status
@@ -368,12 +391,27 @@ export const DashboardScreen: React.FC<DashboardScreenProps> = ({
         )}
       </AnimatePresence>
 
+      {/* Order Confirmation Modal */}
+      <AnimatePresence>
+        {confirmingOrder && (
+          <OrderConfirmationModal
+            qty={confirmingOrder.qty}
+            waterType={confirmingOrder.waterType}
+            paymentMethod={confirmingOrder.paymentMethod}
+            price={confirmingOrder.price}
+            address={profile.address}
+            onConfirm={onConfirmOrder}
+            onCancel={() => setConfirmingOrder(null)}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Order Detail Modal */}
       <AnimatePresence>
         {selectedOrder && (
           <OrderDetailModal
             order={selectedOrder}
-            address={profile.address}
+            address={selectedOrder.address}
             onClose={() => setSelectedOrder(null)}
             onViewHistory={() => {
               setSelectedOrder(null);

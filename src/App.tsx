@@ -50,6 +50,7 @@ export default function App() {
       status: "In Transit",
       date: "16 Juni 2026",
       price: 6000,
+      address: "Perumahan Indah Asri Blok C-12, Tarogong Kidul",
     },
     {
       id: "ORD-87123",
@@ -59,6 +60,7 @@ export default function App() {
       status: "Completed",
       date: "12 Juni 2026",
       price: 36000,
+      address: "Perumahan Indah Asri Blok C-12, Tarogong Kidul",
     },
   ]);
 
@@ -78,7 +80,7 @@ export default function App() {
     triggerNotification(`🔑 Login Sukses! ID Driver: ${kurirId}`);
     // Transition straight to the main panel dashboard, set to order view
     setCurrentScreen(ScreenType.DASHBOARD);
-    setCurrentTab(DashboardTab.ORDER);
+    setCurrentTab(DashboardTab.HOME);
   };
 
   const handleRegisterSuccess = (newProfile: CustomerProfile) => {
@@ -92,6 +94,7 @@ export default function App() {
     waterType: WaterType;
     paymentMethod: PaymentMethod;
     price: number;
+    address: string;
   }) => {
     // Generate simple ID
     const randomId = "ORD-" + Math.floor(10000 + Math.random() * 90000);
@@ -103,6 +106,7 @@ export default function App() {
       status: "Processing",
       date: "Hari Ini",
       price: newOrder.price,
+      address: newOrder.address,
     };
 
     // Prepend order
